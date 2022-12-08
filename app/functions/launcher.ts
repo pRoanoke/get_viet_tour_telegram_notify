@@ -27,6 +27,7 @@ const launchSelfSigned = async (webhookUrl: string, secretPath: string) => {
 	};
 	await bot.launch({
 		webhook: {
+			domain: "null",
 			tlsOptions,
 			hookPath: secretPath,
 			port: port,

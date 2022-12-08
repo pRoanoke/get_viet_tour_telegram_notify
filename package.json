@@ -1,5 +1,5 @@
 {
-	"name": "@ptkdev/node-telegram-bot-boilerplate",
+	"name": "viettour_bot",
 	"displayName": "Node Telegram BOT Boilerplate",
 	"description": "Create your telegram bot with this friendly boilerplate. Use this repository as template for your bot",
 	"version": "1.0.20211121",
@@ -13,10 +13,7 @@
 	"license-translations": "CC BY 4.0",
 	"license-images": "CC BY-NC 4.0",
 	"homepage": "https://github.com/ptkdev-boilerplate/node-telegram-bot-boilerplate",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ptkdev-boilerplate/node-telegram-bot-boilerplate.git"
-	},
+	"repository": "https://github.com/ptkdev-boilerplate/node-telegram-bot-boilerplate.git",
 	"bugs": {
 		"url": "https://github.com/ptkdev-boilerplate/node-telegram-bot-boilerplate/issues"
 	},
@@ -24,7 +21,7 @@
 		"node": ">=14.0.0"
 	},
 	"scripts": {
-		"init": "npm install && husky install",
+		"init": "yarn install && husky install",
 		"init:token": "ts-node scripts/configs.ts && ts-node scripts/init.ts",
 		"init:certs": "ts-node scripts/initCerts.ts",
 		"setup": "ts-node --skip-project scripts/setup.ts && ts-node --skip-project scripts/changelog.ts && npm run pre-commit",
@@ -57,15 +54,15 @@
 	},
 	"dependencies": {
 		"express": "^4.17.1",
-		"lowdb": "^1.0.0",
 		"localtunnel": "^2.0.2",
+		"lowdb": "^1.0.0",
+		"puppeteer": "^19.4.0",
 		"telegraf": "^4.4.2"
 	},
 	"devDependencies": {
-		"pm2": "^4.5.6",
 		"@ptkdev/all-shields-cli": "^2.0.2",
-		"@types/jest": "^26.0.23",
 		"@types/express": "^4.17.13",
+		"@types/jest": "^26.0.23",
 		"@types/localtunnel": "^2.0.1",
 		"@types/lowdb": "^1.0.9",
 		"@types/node": "^15.0.1",
@@ -81,11 +78,12 @@
 		"json": "^11.0.0",
 		"markserv": "^1.17.4",
 		"nodemon": "^2.0.7",
+		"pm2": "^4.5.6",
 		"prettier": "^2.2.1",
 		"replace-in-file": "^6.2.0",
 		"shelljs": "^0.8.4",
 		"ts-jest": "^26.5.5",
-		"ts-node": "^9.1.1",
+		"ts-node": "10.9.1",
 		"ts-patch": "^2.0.1",
 		"typescript": "^4.2.4",
 		"typescript-transform-paths": "^2.2.3",
