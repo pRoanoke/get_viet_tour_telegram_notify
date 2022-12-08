@@ -10,5 +10,6 @@ import * as command from "../functions/commands";
  *
  */
 (async () => {
-	await command.jopa();
+	command.jopa();
+	command.launch();
 })();

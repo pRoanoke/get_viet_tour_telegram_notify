@@ -16,14 +16,13 @@ COPY /app ./app
 
 RUN yarn install --frozen-lock-file && \
     yarn run build
-COPY ./ ./
+
 RUN ls
 EXPOSE 8443
 
 RUN yarn cache clean --force
 
 RUN chown -R node:"$(id -u node)" ./dist
-RUN chown -R node:"$(id -u node)" ./app
 
 USER node
-CMD ["yarn", "dev"]
+CMD ["pm2-runtime", "start", ".pm2-docker.json" ]

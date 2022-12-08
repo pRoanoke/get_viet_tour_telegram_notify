@@ -66,7 +66,7 @@ const launch = async (): Promise<void> => {
 
 const fetchTourAndNotify = async () => {
 	const { price, image } = await fetchTour() as any;
-	await bot.telegram.sendMessage("-852280230", `Current cheapest tour price is ${price}`);
+	await bot.telegram.sendMessage("-852280230", `Current cheapest tour price is ${price} tenge`);
 	await bot.telegram.sendPhoto("-852280230", { source: Buffer.from(image, "base64") });
 };
 
