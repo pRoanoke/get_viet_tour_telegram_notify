@@ -1,4 +1,4 @@
-FROM node:14-alpine AS builder
+FROM ghcr.io/puppeteer/puppeteer:18.2.1 AS builder
 
 WORKDIR /app
 
@@ -7,11 +7,11 @@ COPY . /app
 ENV LANG en_US.utf8
 
 # Install project dependencies
-RUN npm ci && \
-    npm run test && \
-    npm run release
+RUN yarn ci && \
+    yarn run test && \
+    yarn run release
 
-FROM node:14-alpine AS runtime
+FROM ghcr.io/puppeteer/puppeteer:18.2.1 AS runtime
 
 ENV NODE_ENV=production
 ENV PM2_HOME=/app/.pm2
@@ -26,8 +26,8 @@ COPY --from=builder \
     /app/.pm2-docker.json \
     ./
 
-RUN npm ci --production && \
-    npm cache clean --force && \
+RUN yarn ci --production && \
+    yarn cache clean --force && \
     mkdir databases
 
 COPY --from=builder /app/dist dist
