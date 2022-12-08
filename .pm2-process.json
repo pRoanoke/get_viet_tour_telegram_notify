@@ -1,7 +1,7 @@
 {
 	"name": "node-telegram-bot-boilerplate",
 	"script": "dist/core/bot.js",
-	"watch": true,
+	"watch": false,
 	"max_restarts": 9999,
 	"max_memory_restart": "1024M",
 	"instances": 1,

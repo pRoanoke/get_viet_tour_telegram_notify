@@ -1,4 +1,4 @@
-import * as command from "@app/functions/commands";
+import * as command from "../functions/commands";
 
 /**
  * Start bot

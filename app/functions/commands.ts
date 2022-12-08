@@ -7,9 +7,9 @@
  * @license: MIT License
  *
  */
-import bot from "@app/functions/telegraf";
-import * as databases from "@app/functions/databases";
-import config from "@configs/config";
+import bot from "../functions/telegraf";
+import * as databases from "../functions/databases";
+import config from "../configs/config";
 import { launchPolling, launchWebhook } from "./launcher";
 import puppeteer from "puppeteer";
 import fs from "fs";
@@ -84,12 +84,12 @@ const jopa = async (): Promise<void> => {
 };
 
 const fetchTour = async () => {
-		const browser = await puppeteer.launch({ headless: false });
+		const browser = await puppeteer.launch();
 		const page = await browser.newPage();
 	try {
 		await page.goto("https://algritravel.kz/vetnam", { waitUntil: "networkidle0" });
 		await page.click("div.TVSearchButton");
-		await page.waitForNetworkIdle({ idleTime: 3000 });
+		await page.waitForNetworkIdle({ idleTime: 6000 });
 		const resultsSelector = "div.TVResultItemPriceValue";
 		const result = await page.$(".TVHotelResultItem");
 		const screenshot = await result?.screenshot();
@@ -104,7 +104,7 @@ const fetchTour = async () => {
 		// Print all the files.
 		return { price: prices[0], image: screenshot } ;
 	} catch (e) {
-		console.log(e);
+		throw e;
 	} finally {
 		await browser.close();
 	}

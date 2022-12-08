@@ -7,8 +7,8 @@
  * @license: MIT License
  *
  */
-import type { TelegramUserInterface } from "@app/types/databases.type";
-import configs from "@configs/config";
+import type { TelegramUserInterface } from "../types/databases.type";
+import configs from "../configs/config";
 import lowdb from "lowdb";
 import lowdbFileSync from "lowdb/adapters/FileSync";
 
