@@ -8,7 +8,6 @@
  *
  */
 import bot from "../functions/telegraf";
-import * as databases from "../functions/databases";
 import config from "../configs/config";
 import { launchPolling, launchWebhook } from "./launcher";
 import puppeteer from "puppeteer";
@@ -46,8 +45,6 @@ const sendPhoto = async (): Promise<void> => {
  */
 const start = async (): Promise<void> => {
 	bot.start((ctx) => {
-		databases.writeUser(ctx.update.message.from);
-
 		ctx.telegram.sendMessage(ctx.message.chat.id, `Welcome! Try send /photo command or write any text`);
 	});
 };

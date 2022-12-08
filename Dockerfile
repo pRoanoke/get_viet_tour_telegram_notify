@@ -1,38 +1,28 @@
-FROM ghcr.io/puppeteer/puppeteer:18.2.1 AS builder
-
-WORKDIR /app
-
-COPY . /app
-
-ENV LANG en_US.utf8
-
-# Install project dependencies
-RUN yarn run test && \
-    yarn run release
-
 FROM ghcr.io/puppeteer/puppeteer:18.2.1 AS runtime
+USER root
 
-ENV NODE_ENV=production
-ENV PM2_HOME=/app/.pm2
+RUN npm i -g pm2 typescript ts-node
+ENV LANG en_US.utf8
+# Install project dependencies
 
+COPY /package.json \
+	./yarn.lock \
+	./tsconfig.json \
+	./.puppeteer.cjs \
+	./.pm2-docker.json \
+	./
+
+COPY /app ./app
+
+RUN yarn install --frozen-lock-file && \
+    yarn run build
+
+RUN ls
 EXPOSE 8443
 
-WORKDIR /app
+RUN yarn cache clean --force
 
-COPY --from=builder \
-    /app/package.json \
-    /app/package-lock.json \
-    /app/.pm2-docker.json \
-    ./
-
-RUN yarn ci --production && \
-    yarn cache clean --force && \
-    mkdir databases
-
-COPY --from=builder /app/dist dist
-
-RUN chown -R node:"$(id -u node)" /app
+RUN chown -R node:"$(id -u node)" ./dist
 
 USER node
-
-CMD ["npm", "run", "start-docker"]
+CMD ["pm2-runtime", "start", ".pm2-docker.json" ]
