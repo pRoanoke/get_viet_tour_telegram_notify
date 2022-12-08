@@ -7,8 +7,7 @@ COPY . /app
 ENV LANG en_US.utf8
 
 # Install project dependencies
-RUN yarn ci && \
-    yarn run test && \
+RUN yarn run test && \
     yarn run release
 
 FROM ghcr.io/puppeteer/puppeteer:18.2.1 AS runtime
